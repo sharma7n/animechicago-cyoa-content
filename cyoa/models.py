@@ -7,12 +7,21 @@ class Question(models.Model):
     
     root = models.BooleanField(default=False)
     text = models.TextField()
+    
+    def __str__(self):
+        return (
+            f"{'ROOT - ' if self.root else ''}"
+            f"{self.text}"
+        )
 
 class Source(models.Model):
     """ A place where the recommendation can be accessed or obtained. """
     
     name = models.CharField(max_length=128)
     url = models.URLField()
+    
+    def __str__(self):
+        return f"{self.name}"
 
 class Recommendation(models.Model):
     """ A media item recommended by the app. """
@@ -20,6 +29,9 @@ class Recommendation(models.Model):
     title = models.CharField(max_length=256)
     description = models.TextField()
     available_on = models.ManyToManyField(Source)
+    
+    def __str__(self):
+        return f"{self.title}"
 
 class ChoiceResultType(enum.Enum):
     """ Possible result types for a Choice. """
@@ -40,13 +52,14 @@ class Choice(models.Model):
     
     result_type = models.CharField(
         max_length=max(len(item.value) for item in ChoiceResultType),
-        choices=[(item, item.value) for item in ChoiceResultType],
+        choices=[(item.value, item.value) for item in ChoiceResultType],
         default=ChoiceResultType.QUESTION,
     )
     
     result_question = models.ForeignKey(
         Question,
         on_delete=models.PROTECT,
+        null=True,
         blank=True,
         related_name="result_question",
     )
@@ -54,6 +67,20 @@ class Choice(models.Model):
     result_recommendation = models.ForeignKey(
         Recommendation,
         on_delete=models.PROTECT,
+        null=True,
         blank=True,
         related_name="result_recommendation",
     )
+    
+    @property
+    def result(self):
+        return {
+            ChoiceResultType.QUESTION.value: self.result_question,
+            ChoiceResultType.RECOMMENDATION.value: self.result_recommendation,
+        }.get(self.result_type)
+    
+    def __str__(self):
+        return (
+            f"{self.question} "
+            f"{self.text}"
+        )

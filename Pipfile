@@ -6,8 +6,10 @@ name = "pypi"
 [packages]
 django = "*"
 "psycopg2" = "*"
+attrs = "*"
 
 [dev-packages]
+pp-ez = "*"
 
 [requires]
 python_version = "3.6"

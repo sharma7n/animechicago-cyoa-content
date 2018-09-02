@@ -1,0 +1,10 @@
+-i https://pypi.org/simple
+attrs==18.1.0
+certifi==2018.4.16
+chardet==3.0.4
+django==2.1
+idna==2.7
+psycopg2==2.7.5
+pytz==2018.5
+requests==2.19.1
+urllib3==1.23; python_version != '3.6.*'

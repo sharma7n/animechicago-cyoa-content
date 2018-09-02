@@ -23,10 +23,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'cyoa-content-sharma7n.c9users.io',
+    'captain.app.test-cyoa.club',
+    'app.test-cyoa.club',
 ]
 
 
@@ -79,12 +81,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'cyoa',
-        'USER': os.environ['DJANGO_DB_POSTGRES_USERID'],
-        'PASSWORD': os.environ['DJANGO_DB_POSTGRES_PASSWORD'],
-        'HOST': '0.0.0.0',
-        'PORT': '',
-    }
+        'NAME': os.environ['POSTGRES_DB'],
+        'USER': os.environ['POSTGRES_USER'],
+        'PASSWORD': os.environ['POSTGRES_PASSWORD'],
+        'HOST': os.environ['POSTGRES_HOST'],
+        'PORT': os.environ['POSTGRES_PORT'],
+    },
 }
 
 

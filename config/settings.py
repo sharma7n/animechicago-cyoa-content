@@ -23,10 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
-    'cyoa-content-sharma7n.c9users.io',
+    'localhost',
+    '204.48.28.185', # DigitalOcean Droplet (dev machine)
 ]
 
 
@@ -79,11 +80,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'cyoa',
-        'USER': os.environ['DJANGO_DB_POSTGRES_USERID'],
-        'PASSWORD': os.environ['DJANGO_DB_POSTGRES_PASSWORD'],
-        'HOST': '0.0.0.0',
-        'PORT': '',
+        'NAME': os.environ['DJANGO_DB_NAME'],
+        'USER': os.environ['DJANGO_DB_USERID'],
+        'PASSWORD': os.environ['DJANGO_DB_PASSWORD'],
+        'HOST': os.environ.get('DJANGO_DB_HOST', '0.0.0.0'),
+        'PORT': os.environ.get('DJANGO_DB_PORT', ''),
     }
 }
 
@@ -125,3 +126,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/') # for nginx

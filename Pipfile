@@ -5,9 +5,10 @@ name = "pypi"
 
 [packages]
 django = "*"
-"psycopg2" = "*"
 attrs = "*"
 requests = "*"
+"psycopg2-binary" = "*"
+gunicorn = "*"
 
 [dev-packages]
 

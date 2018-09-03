@@ -28,6 +28,7 @@ DEBUG = False
 ALLOWED_HOSTS = [
     'localhost',
     '204.48.28.185', # DigitalOcean Droplet (dev machine)
+    '.herokuapp.com', # Heroku
 ]
 
 

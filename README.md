@@ -2,6 +2,14 @@
 
 Content manager for the AnimeChicago CYOA application.
 
+## Getting Started
+
+```
+bash app-bootstrap.sh
+pipenv shell
+python manage.py runserver $IP:$PORT
+```
+
 ## Functions
 
 1. Create, update, and delete questions

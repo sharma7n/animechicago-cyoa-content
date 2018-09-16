@@ -13,6 +13,8 @@ django-heroku = "*"
 python-dotenv = "*"
 
 [dev-packages]
+pytest = "*"
+pytest-django = "*"
 
 [requires]
 python_version = "3.6"

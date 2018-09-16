@@ -30,6 +30,9 @@ class Recommendation(models.Model):
     description = models.TextField()
     available_on = models.ManyToManyField(Source)
     
+    def available_on_iter(self):
+        return self.available_on.all()
+    
     def __str__(self):
         return f"{self.title}"
 

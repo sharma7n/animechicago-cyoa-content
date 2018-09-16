@@ -2,21 +2,20 @@
 
 Content manager for the AnimeChicago CYOA application.
 
-## Getting Started
+## Functionality
 
-```
-bash app-bootstrap.sh
-pipenv shell
-python manage.py runserver $IP:$PORT
-```
+Log in as an administrator user, and create, update, or delete questions.
 
-## Functions
+## Development
 
-1. Create, update, and delete questions
-2. Provide access to the most current valid game state via a GraphQL API
+### Initial Setup
 
-## User Access Levels
+The following steps assume a fresh Cloud9 workspace.
 
-1. Admin: all rights
-2. Contributor: Can suggest new questions / answers, but not mutate any real game states
-3. No rights
+1. Run: `bash app-bootstrap.sh`
+2. Configure postgres locally: https://community.c9.io/t/setting-up-postgresql/1573
+3. Create an admin user: `pipenv run python manage.py createsuperuser`
+
+### Launch the Development Server
+
+`pipenv run python manage.py runserver $IP:$PORT`

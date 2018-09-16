@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())
+
 import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -29,10 +32,9 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     'localhost',
-    '204.48.28.185', # DigitalOcean Droplet (dev machine)
     '.herokuapp.com', # Heroku
+    'cyoa-content-sharma7n.c9users.io', # Cloud9
 ]
-
 
 # Application definition
 
@@ -90,7 +92,6 @@ DATABASES = {
         'PORT': os.environ.get('DJANGO_DB_PORT', ''),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators

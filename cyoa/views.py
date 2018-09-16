@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from django.http import JsonResponse
 
-# Create your views here.
+from . import game
+from . import urls
+
+
+def get_game(request):
+    game_state = game.GameState.from_current()
+    data = game.generate(game_state)
+    return JsonResponse(data)

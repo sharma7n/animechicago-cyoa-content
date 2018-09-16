@@ -52,28 +52,24 @@ def test_game_generate_complex():
     
     killlakill = models.Recommendation(
         title="Kill La Kill",
-        description="Sexy scissors",
     )
     killlakill.save()
     killlakill.available_on.add(funimation)
     
     berserk = models.Recommendation(
         title="Berserk",
-        description="Grimdark fantasy",
     )
     berserk.save()
     berserk.available_on.add(funimation)
     
     ippo = models.Recommendation(
         title="Hajime no Ippo",
-        description="Road to the Championship",
     )
     ippo.save()
     ippo.available_on.add(vrv)
     
     mobpsycho = models.Recommendation(
         title="Mob Psycho 100",
-        description="Psychic powers by ONE",
     )
     mobpsycho.save()
     mobpsycho.available_on.add(funimation)
@@ -81,7 +77,6 @@ def test_game_generate_complex():
     
     tonegawa = models.Recommendation(
         title="Mr. Tonegawa Middle Management Blues",
-        description="Fukumoto office comedy",
     )
     tonegawa.save()
     tonegawa.available_on.add(vrv)

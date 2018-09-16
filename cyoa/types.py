@@ -29,7 +29,6 @@ class Recommendation(MockModel):
     """ A media item recommended by the app. """
     
     title: str = attr.ib()
-    description: str = attr.ib()
     available_on: list = attr.ib()
     
     def available_on_iter(self):

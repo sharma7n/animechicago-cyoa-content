@@ -27,7 +27,6 @@ class Recommendation(models.Model):
     """ A media item recommended by the app. """
     
     title = models.CharField(max_length=256)
-    description = models.TextField()
     available_on = models.ManyToManyField(Source)
     
     def available_on_iter(self):

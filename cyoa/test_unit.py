@@ -24,7 +24,6 @@ def test_game_generate_single_nonroot_question_with_choices():
     
     recommendation = types.Recommendation(
         title="Recommendation",
-        description="Recommendation",
         available_on=[
             types.Source(name="Source", url="https://source.com")
         ],
@@ -56,7 +55,6 @@ def test_one_choice_quiz():
                 result_type="Recommendation",
                 result_recommendation=types.Recommendation(
                     title="Recommendation",
-                    description="Recommendation",
                     available_on=[
                         types.Source(
                             name="Source", 

@@ -11,6 +11,7 @@ requests = "*"
 gunicorn = "*"
 django-heroku = "*"
 python-dotenv = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 pytest = "*"

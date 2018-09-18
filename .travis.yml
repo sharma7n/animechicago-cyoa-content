@@ -14,8 +14,7 @@ env:
 
 # command to install dependencies
 install:
-    - pip install pipenv
-	- pipenv install --dev --three
+    - pip install pipenv; pipenv install --dev --three
 
 before_script:
     - psql -c 'create database travis_ci_test;' -U postgres

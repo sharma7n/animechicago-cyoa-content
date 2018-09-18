@@ -6,6 +6,7 @@ class Question(models.Model):
     """ A question with one or more possible answers. """
     
     root = models.BooleanField(default=False)
+    code = models.SlugField(null=True, blank=True)
     text = models.TextField()
     
     def __str__(self):

@@ -21,4 +21,4 @@ before_script:
 
 # # command to run tests
 script:
-    - pipenv run -- py.test tests -s -v
+    - pipenv run pytest

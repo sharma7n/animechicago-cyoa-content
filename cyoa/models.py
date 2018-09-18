@@ -12,7 +12,7 @@ class Question(models.Model):
     def __str__(self):
         return (
             f"{'ROOT - ' if self.root else ''}"
-            f"{self.text}"
+            f"{self.code} - {self.text}"
         )
 
 class Source(models.Model):

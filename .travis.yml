@@ -3,13 +3,20 @@ language: python
 python:
     - "3.6"
 
+services:
+    - postgresql
+
 env:
   global:
+    - PGPORT=5432
     - PIPENV_VENV_IN_PROJECT=1
     - PIPENV_IGNORE_VIRTUALENVS=1
 
 # command to install dependencies
 install: make setup
+
+before_script:
+    - psql -c 'create database travis_ci_test;' -U postgres
 
 # # command to run tests
 script: make test

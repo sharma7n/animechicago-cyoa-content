@@ -13,10 +13,13 @@ env:
     - PIPENV_IGNORE_VIRTUALENVS=1
 
 # command to install dependencies
-install: make setup
+install:
+    - pip install pipenv
+	- pipenv install --dev --three
 
 before_script:
     - psql -c 'create database travis_ci_test;' -U postgres
 
 # # command to run tests
-script: make test
+script:
+    - pipenv run -- py.test tests -s -v

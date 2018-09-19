@@ -144,7 +144,7 @@ def get_paths(node: dict, path_parts: list=None) -> iter:
         yield path_parts, f"Recommendation: {node['title']}"
     
     def on_error():
-        yield [], "Nothing"
+        yield path_parts, f"{node.get('type'), 'Unknown'}: {node.get('text', 'no text attribute available')}"
     
     yield from {
         "Question": on_question,

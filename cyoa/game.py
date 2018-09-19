@@ -129,3 +129,24 @@ def get_leaves(node: dict) -> iter:
             yield from get_leaves(choice['result'])
     else:
         raise ValueError(f"Unknown node type {node_type}")
+
+def get_paths(node: dict, path_parts: list=None) -> iter:
+    """ Iterates through all of the game data and yields out each node along with its full path. """
+    if not path_parts:
+        path_parts = []
+    
+    def on_question():
+        yield path_parts, f"Question: {node['text']}"
+        for choice in node['choices']:
+            yield from get_paths(choice['result'], path_parts + [choice['text'],])
+    
+    def on_recommendation():
+        yield path_parts, f"Recommendation: {node['title']}"
+    
+    def on_error():
+        yield [], "Nothing"
+    
+    yield from {
+        "Question": on_question,
+        "Recommendation": on_recommendation,
+    }.get(node['type'], on_error)()

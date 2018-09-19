@@ -122,3 +122,47 @@ def test_get_leaves():
             },
         ],
     })]
+
+def test_get_paths():
+    assert list(game.get_paths({
+        'type': "Question",
+        'text': "Root",
+        'choices': [
+            {
+                'text': "1",
+                'result': {
+                    'type': "Recommendation",
+                    'title': "a",
+                },
+            },
+            {
+                'text': "2",
+                'result': {
+                    'type': "Question",
+                    'text': "Branch",
+                    'choices': [
+                        {
+                            'text': "3",
+                            'result': {
+                                'type': "Recommendation",
+                                'title': "b"
+                            },
+                        },
+                        {
+                            'text': "4",
+                            'result': {
+                                'type': "Recommendation",
+                                'title': "c"
+                            },
+                        },
+                    ],
+                },
+            },
+        ],
+    })) == [
+        ([], "Question: Root"),
+        (list("1"), "Recommendation: a"),
+        (list("2"), "Question: Branch"),
+        (list("23"), "Recommendation: b"),
+        (list("24"), "Recommendation: c"),
+    ]

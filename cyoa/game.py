@@ -114,3 +114,18 @@ def generate(game_state: GameState) -> dict:
         }
     else:
         return generate_question_data(game_state.root_question)
+
+def get_leaves(node: dict) -> iter:
+    """ Iterates through all of the game data and yields out the recommendations. """
+    
+    node_type = node['type']
+    
+    if node_type == "Error":
+        raise ValueError(node['text'])
+    elif node_type == "Recommendation":
+        yield node
+    elif node_type == "Question":
+        for choice in node['choices']:
+            yield from get_leaves(choice['result'])
+    else:
+        raise ValueError(f"Unknown node type {node_type}")

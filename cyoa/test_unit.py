@@ -86,3 +86,39 @@ def test_one_choice_quiz():
             },
         ],
     }
+
+def test_get_recommendations_empty():
+    with pytest.raises(KeyError):
+        list(game.get_leaves({}))
+
+def test_get_leaves():
+    assert list("abc") == [rec['title'] for rec in game.get_leaves({
+        'type': "Question",
+        'choices': [
+            {
+                'result': {
+                    'type': "Recommendation",
+                    'title': "a",
+                },
+            },
+            {
+                'result': {
+                    'type': "Question",
+                    'choices': [
+                        {
+                            'result': {
+                                'type': "Recommendation",
+                                'title': "b"
+                            },
+                        },
+                        {
+                            'result': {
+                                'type': "Recommendation",
+                                'title': "c"
+                            },
+                        },
+                    ],
+                },
+            },
+        ],
+    })]

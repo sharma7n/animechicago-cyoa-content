@@ -86,3 +86,83 @@ def test_one_choice_quiz():
             },
         ],
     }
+
+def test_get_recommendations_empty():
+    with pytest.raises(KeyError):
+        list(game.get_leaves({}))
+
+def test_get_leaves():
+    assert list("abc") == [rec['title'] for rec in game.get_leaves({
+        'type': "Question",
+        'choices': [
+            {
+                'result': {
+                    'type': "Recommendation",
+                    'title': "a",
+                },
+            },
+            {
+                'result': {
+                    'type': "Question",
+                    'choices': [
+                        {
+                            'result': {
+                                'type': "Recommendation",
+                                'title': "b"
+                            },
+                        },
+                        {
+                            'result': {
+                                'type': "Recommendation",
+                                'title': "c"
+                            },
+                        },
+                    ],
+                },
+            },
+        ],
+    })]
+
+def test_get_paths():
+    assert list(game.get_paths({
+        'type': "Question",
+        'text': "Root",
+        'choices': [
+            {
+                'text': "1",
+                'result': {
+                    'type': "Recommendation",
+                    'title': "a",
+                },
+            },
+            {
+                'text': "2",
+                'result': {
+                    'type': "Question",
+                    'text': "Branch",
+                    'choices': [
+                        {
+                            'text': "3",
+                            'result': {
+                                'type': "Recommendation",
+                                'title': "b"
+                            },
+                        },
+                        {
+                            'text': "4",
+                            'result': {
+                                'type': "Recommendation",
+                                'title': "c"
+                            },
+                        },
+                    ],
+                },
+            },
+        ],
+    })) == [
+        ([], "Question: Root"),
+        (list("1"), "Recommendation: a"),
+        (list("2"), "Question: Branch"),
+        (list("23"), "Recommendation: b"),
+        (list("24"), "Recommendation: c"),
+    ]

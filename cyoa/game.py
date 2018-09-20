@@ -85,7 +85,7 @@ def generate(game_state: GameState) -> dict:
         else:
             return {
                 'type': "Error",
-                'text': "Question node contains no data.",
+                'text': f"Question {question} does not exist or has no choices.",
             }
     
     def generate_choice_data(choice):

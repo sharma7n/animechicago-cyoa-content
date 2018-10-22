@@ -104,7 +104,8 @@ def generate(game_state: GameState) -> dict:
                     'url': source.url,
                 }
                 for source in recommendation.available_on_iter()
-            ]
+            ],
+            'drawer': recommendation.drawer,
         }
     
     if not game_state.root_question or not game_state.root_question.root:

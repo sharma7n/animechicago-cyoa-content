@@ -30,6 +30,7 @@ class Recommendation(MockModel):
     
     title: str = attr.ib()
     available_on: list = attr.ib()
+    drawer: int = attr.ib(default=None)
     
     def available_on_iter(self):
         return self.available_on

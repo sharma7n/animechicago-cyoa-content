@@ -61,6 +61,7 @@ def test_one_choice_quiz():
                             url="https://source.com"
                         ),
                     ],
+                    drawer=1,
                 ),
             ),
         ],
@@ -82,6 +83,7 @@ def test_one_choice_quiz():
                             'url': "https://source.com",
                         },
                     ],
+                    'drawer': 1,
                 },
             },
         ],
@@ -108,13 +110,13 @@ def test_get_leaves():
                         {
                             'result': {
                                 'type': "Recommendation",
-                                'title': "b"
+                                'title': "b",
                             },
                         },
                         {
                             'result': {
                                 'type': "Recommendation",
-                                'title': "c"
+                                'title': "c",
                             },
                         },
                     ],

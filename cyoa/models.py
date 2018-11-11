@@ -29,7 +29,7 @@ class Recommendation(models.Model):
     
     title = models.CharField(max_length=256)
     available_on = models.ManyToManyField(Source)
-    drawer = models.PositiveSmallIntegerField(null=True, blank=True)
+    drawer = models.PositiveSmallIntegerField()
     
     def available_on_iter(self):
         return self.available_on.all()

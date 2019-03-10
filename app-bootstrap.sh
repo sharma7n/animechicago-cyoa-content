@@ -3,8 +3,8 @@
 
 # --- Install Python 3.6 and pip
 sudo apt-get update
-sudo apt-get install python3.6 python3.6-venv -y
-sudo python3.6 -m ensurepip --upgrade
+sudo apt-get install python3.7 python3.7-venv -y
+sudo python3.7 -m ensurepip --upgrade
 
 # --- Install Pipenv
 pip3 install --user pipenv

@@ -1,10 +1,10 @@
 # Sets up python runtime and library dependencies for development on a fresh Cloud9 workspace.
 # To execute: bash app-bootstrap.sh
 
-# --- Install Python 3.6 and pip
+# --- Install Python 3.8 and pip
 sudo apt-get update
-sudo apt-get install python3.7 python3.7-venv -y
-sudo python3.7 -m ensurepip --upgrade
+sudo apt-get install python3.8 python3.8-venv -y
+sudo python3.8 -m ensurepip --upgrade
 
 # --- Install Pipenv
 pip3 install --user pipenv
@@ -14,6 +14,3 @@ source ~/.profile
 
 # --- Use Pipenv to install dependencies
 pipenv install --dev
-
-# --- Initialize Django settings
-pipenv run python manage.py collectstatic

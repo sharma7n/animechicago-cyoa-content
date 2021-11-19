@@ -33,7 +33,8 @@ DEBUG = False
 ALLOWED_HOSTS = [
     'localhost',
     '.herokuapp.com', # Heroku
-    'cyoa-content-sharma7n.c9users.io', # Cloud9
+    '.c9users.io', # Cloud9
+    '.gitpod.io', # gitpod
 ]
 
 # Application definition
@@ -136,4 +137,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-django_heroku.settings(locals())
+if not os.environ.get('DJANGO_GITPOD', False):
+    django_heroku.settings(locals())

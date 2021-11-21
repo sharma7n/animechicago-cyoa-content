@@ -137,6 +137,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+if os.environ.get('DJANGO_GITPOD', False):
+    STATIC_URL = '.static/'
+
 if not os.environ.get('DJANGO_GITPOD', False):
-    STATIC_URL = '/.static/'
     django_heroku.settings(locals())

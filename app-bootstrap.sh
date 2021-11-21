@@ -18,4 +18,4 @@ pipenv install --dev
 # --- Initialize Django
 pipenv run python manage.py makemigrations
 pipenv run python manage.py migrate
-# pipenv run python manage.py createsuperuser --username gitpod --email gitpod@none.com --no-input
+pipenv run python manage.py createsuperuser --username gitpod --email gitpod@none.com --database default --no-input

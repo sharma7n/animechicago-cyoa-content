@@ -18,5 +18,4 @@ pipenv install --dev
 # --- Initialize Django
 pipenv run python manage.py makemigrations
 pipenv run python manage.py migrate
-echo $DJANGO_SUPERUSER_PASSWORD
-pipenv run python manage.py createsuperuser --username gitpod --email gitpod@none.com --no-input
+pipenv run python manage.py createdevadmin

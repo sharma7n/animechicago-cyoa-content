@@ -151,3 +151,49 @@ def get_paths(node: dict, path_parts: list=None) -> iter:
         "Question": on_question,
         "Recommendation": on_recommendation,
     }.get(node['type'], on_error)()
+
+@attr.s
+class Traversal(object):
+    """ A record of all data reachable from the root question. """
+    questions: set = attr.ib()
+    sources: set = attr.ib()
+    recommendations: set = attr.ib()
+    choices: set = attr.ib()
+
+def traverse(game_state: GameState) -> Traversal:
+    """ Traverses the game state to produce a record of what the game data contains. """
+
+    t = Traversal(set(), set(), set(), set())
+
+    # Starting at the root question, recursively fill the data set
+    def generate_question_data(question):
+        valid_question = (
+            question
+            and (question.id in game_state.questions_to_choices)
+        )
+        
+        if valid_question:
+            t.questions.add(question.id)
+            for qc in game_state.questions_to_choices[question.id]:
+                generate_choice_data(qc)
+        else:
+            raise ValueError(f"Question {question} does not exist or has no choices.")
+    
+    def generate_choice_data(choice):
+        t.choices.add(choice.id)
+        {
+            ChoiceResultType.QUESTION.value: generate_question_data,
+            ChoiceResultType.RECOMMENDATION.value: generate_recommendation_data,
+        }.get(choice.result_type)(choice.result)
+    
+    def generate_recommendation_data(recommendation):
+        t.recommendations.add(recommendation.id)
+        for source in recommendation.available_on_iter():
+            t.sources.add(source.id)
+    
+    if not game_state.root_question or not game_state.root_question.root:
+        raise ValueError("Did not find a root question")
+    else:
+        generate_question_data(game_state.root_question)
+    
+    return t

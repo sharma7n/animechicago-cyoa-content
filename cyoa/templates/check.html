@@ -1,0 +1,141 @@
+<ul>
+    <li>
+    {% if generate_success %}
+    ✔️ Successfully generated game data!
+    {% else %}
+    ❌ Did not successfully generate game data: {{ traversal_error }}
+    {% endif %}
+    </li>
+
+    <li>
+        {% if root_questions|length == 0 %}
+        ❌ There are no root questions.
+        {% elif root_questions|length > 1 %}
+        ❌ There is more than one root question:
+        <ul>
+            {% for rq in root_questions %}
+            <li>{{ rq.code }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        ✔️ There is exactly one root question: {% for rq in root_questions %}{{ rq.code }}{% endfor %}
+        {% endif %}
+    </li>
+
+    <li>
+    {% if exists_questions_without_at_least_two_choices %}
+    ❌ Some questions do not have at least two associated choices:
+    <ul>
+        {% for question_code, choices in questions_without_at_least_two_choices.items %}
+        <li>Question {{ question_code }} has choices {{ choices }} </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    ✔️ Every question has at least two associated choices!
+    {% endif %}
+    </li>
+
+    <li>
+        {% if questions_not_reachable|length > 0 %}
+        ❌ Some questions are unreachable:
+        <ul>
+            {% for question_code in questions_not_reachable %}
+            <li>{{ question_code }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        ✔️ Every question is reachable!
+        {% endif %}
+    </li>
+
+    <li>
+        {% if choices_not_reachable|length > 0 %}
+        ❌ Some choices are unreachable:
+        <ul>
+            {% for choice_text in choices_not_reachable %}
+            <li>{{ choice_text }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        ✔️ Every choice is reachable!
+        {% endif %}
+    </li>
+
+    <li>
+        {% if sources_not_reachable|length > 0 %}
+        ❌ Some sources are unreachable:
+        <ul>
+            {% for source_name in sources_not_reachable %}
+            <li>{{ source_name }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        ✔️ Every source is reachable!
+        {% endif %}
+    </li>
+
+    <li>
+        {% if recommendations_not_reachable|length > 0 %}
+        ❌ Some recommendations are unreachable:
+        <ul>
+            {% for recommendation_title in recommendations_not_reachable %}
+            <li>{{ recommendation_title }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        ✔️ Every recommendation is reachable!
+        {% endif %}
+    </li>
+
+    
+    {% if choices_with_no_results|length > 0 %}
+    <li>
+    ❌ Some choices lead neither to a question nor a recommendation:
+        <ul>
+            {% for choice_text in choices_with_no_results %}
+            <li>{{ choice_text }}</li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% endif %}
+    
+
+    {% if choices_with_two_results|length > 0 %}
+    <li>
+    ❌ Some choices lead both to a question and a recommendation:
+        <ul>
+            {% for choice_text in choices_with_two_results %}
+            <li>{{ choice_text }}</li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% endif %}
+
+    {% if choices_with_question_type_but_recommendation|length > 0 %}
+    <li>
+    ❌ Some choices have the QUESTION result type, but point to a recommendation instead:
+        <ul>
+            {% for choice_text in choices_with_question_type_but_recommendation %}
+            <li>{{ choice_text }}</li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% endif %}
+
+    {% if choices_with_recommendation_type_but_question|length > 0 %}
+    <li>
+    ❌ Some choices have the RECOMMENDATION result type, but point to a question instead:
+        <ul>
+            {% for choice_text in choices_with_recommendation_type_but_question %}
+            <li>{{ choice_text }}</li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% endif %}
+    
+    {% if choices_with_no_results|length == 0 and choices_with_two_results|length == 0 and choices_with_question_type_but_recommendation|length == 0 and choices_with_recommendation_type_but_question|length == 0 %}
+    <li>
+    ✔️ Every choice leads to either a question or a recommendation!
+    </li>
+    {% endif %}
+</ul>

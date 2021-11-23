@@ -2,5 +2,5 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - init: bash app-bootstrap.sh
+  - init: bash app-bootstrap-dev.sh
     command: pipenv run python manage.py runserver --settings=config.dev_settings

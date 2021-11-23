@@ -15,5 +15,8 @@ source ~/.profile
 # --- Use Pipenv to install dependencies
 pipenv install --dev
 
-# --- Initialize Django settings
-pipenv run python manage.py collectstatic
+# --- Initialize Django
+pipenv run python manage.py makemigrations
+pipenv run python manage.py migrate
+pipenv run python manage.py createdevadmin
+pipenv run python manage.py createdevrecords

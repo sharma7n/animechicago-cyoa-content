@@ -1,5 +1,8 @@
+import json
+
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.core.mail import send_mail
 
 from cyoa.models import Question, Choice, ChoiceResultType, Recommendation, Source
 
@@ -105,3 +108,17 @@ def check_game(request):
         'choices_with_recommendation_type_but_question': choices_with_recommendation_type_but_question,
     }
     return render(request, 'check.html', context=context)
+
+def generate_lead(request):
+    if request.method != 'POST':
+        raise ValueError(f"unsupported HTTP method: {request.method}")
+    
+    json_str = request.body.decode('utf8').replace("'", '"')
+    print(json_str)
+    post_data = json.loads(request)
+    print(post_data)
+
+    recipients = [post_data['to_email']]
+    send_mail("Your AnimeChicago Recommendation", "Hello, World!", "noreply@bot.animechicago.com", recipients)
+
+    pass

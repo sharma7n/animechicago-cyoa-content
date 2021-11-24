@@ -137,5 +137,21 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Email
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.environ.get('MAILGUN_SMTP_SERVER', '')
+EMAIL_PORT = os.environ.get('MAILGUN_SMTP_PORT', '')
+EMAIL_HOST_USER = os.environ.get('MAILGUN_SMTP_LOGIN', '')
+EMAIL_HOST_PASSWORD = os.environ.get('MAILGUN_SMTP_PASSWORD', '')
+EMAIL_USE_TLS = True
+# EMAIL_USE_SSL
+# EMAIL_TIMEOUT
+# ssl_keyfile: EMAIL_SSL_KEYFILE
+# ssl_certfile: EMAIL_SSL_CERTFILE
+
+
+# Heroku
+
 if not os.environ.get('DJANGO_GITPOD', False):
     django_heroku.settings(locals())

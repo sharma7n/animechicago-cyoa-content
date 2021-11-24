@@ -12,6 +12,7 @@ gunicorn = "*"
 django-heroku = "*"
 python-dotenv = "*"
 django-cors-headers = "*"
+django-anymail = {extras = ["mailgun"], version = "*"}
 
 [dev-packages]
 pytest = "*"

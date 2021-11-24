@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
+    'anymail',
 ]
 
 MIDDLEWARE = [
@@ -139,17 +140,13 @@ STATIC_URL = '/static/'
 
 # Email
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.environ.get('MAILGUN_SMTP_SERVER', '')
-EMAIL_PORT = os.environ.get('MAILGUN_SMTP_PORT', '')
-EMAIL_HOST_USER = os.environ.get('MAILGUN_SMTP_LOGIN', '')
-EMAIL_HOST_PASSWORD = os.environ.get('MAILGUN_SMTP_PASSWORD', '')
-EMAIL_USE_TLS = True
-# EMAIL_USE_SSL
-# EMAIL_TIMEOUT
-# ssl_keyfile: EMAIL_SSL_KEYFILE
-# ssl_certfile: EMAIL_SSL_CERTFILE
-
+ANYMAIL = {
+    "MAILGUN_API_KEY": os.environ.get('MAILGUN_API_KEY', '')
+    # "MAILGUN_SENDER_DOMAIN": 'mg.example.com',  # your Mailgun domain, if needed
+}
+EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+DEFAULT_FROM_EMAIL = "noreply@animechicago-cyoa-content.herokuapp.com"
+SERVER_EMAIL = "noreply@animechicago-cyoa-content.herokuapp.com"
 
 # Heroku
 

@@ -1,10 +1,14 @@
 import json
 
+import attr
+import cattr
 from django.http import JsonResponse
 from django.shortcuts import render
-from django.core.mail import send_mail
+from django.views.decorators.csrf import csrf_exempt
 
 from cyoa.models import Question, Choice, ChoiceResultType, Recommendation, Source
+from cyoa.api import SendMailRequest, SendMailResponse
+from cyoa.mail import send_mail
 
 from . import game
 from . import urls
@@ -109,16 +113,17 @@ def check_game(request):
     }
     return render(request, 'check.html', context=context)
 
+@csrf_exempt # Frontend app will not have user session for CSRF token
 def generate_lead(request):
     if request.method != 'POST':
-        raise ValueError(f"unsupported HTTP method: {request.method}")
+        error_message = f"Invalid request method: {request.method}. Only POST is supported."
+        return JsonResponse(attr.asdict(SendMailResponse(success=False, error_message=error_message)))
     
-    json_str = request.body.decode('utf8').replace("'", '"')
-    print(json_str)
-    post_data = json.loads(request)
-    print(post_data)
+    post_data = json.loads(request.body)
+    smr = cattr.structure(post_data, SendMailRequest)
 
-    recipients = [post_data['to_email']]
-    send_mail("Your AnimeChicago Recommendation", "Hello, World!", "noreply@bot.animechicago.com", recipients)
-
-    pass
+    resp = send_mail(smr)
+    if resp.status_code == 200:
+        return JsonResponse(attr.asdict(SendMailResponse(success=True, error_message=None)))
+    else:
+        return JsonResponse(attr.asdict(SendMailResponse(success=False, error_message=resp.text)))

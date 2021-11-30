@@ -13,6 +13,7 @@ django-heroku = "*"
 python-dotenv = "*"
 django-cors-headers = "*"
 django-anymail = {extras = ["mailgun"], version = "*"}
+cattrs = "*"
 
 [dev-packages]
 pytest = "*"

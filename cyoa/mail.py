@@ -1,4 +1,7 @@
+import attr
 import requests
+
+from django.template.loader import render_to_string
 
 from config.settings import MAILGUN_API_KEY, MAILGUN_DOMAIN
 from cyoa.api import SendMailRequest
@@ -8,12 +11,13 @@ AUTH = ('api', MAILGUN_API_KEY)
 FROM = f'AnimeChicago Advice Bot <noreply@{MAILGUN_DOMAIN}>'
 SUBJECT = "Your Anime Recommendation!"
 
-def send_mail(req: SendMailRequest):
+def send_mail(smr: SendMailRequest):
+    html = render_to_string('email.html', context=attr.asdict(smr))
     data = {
         'from': FROM,
-        'to': [req.to],
+        'to': [smr.to],
         'subject': SUBJECT,
-        'text': f"You should watch {req.recommendation}! It's streaming on {req.source}."
+        'html': html,
     }
 
     return requests.post(

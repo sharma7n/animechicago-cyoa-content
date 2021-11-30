@@ -138,12 +138,21 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Gitpod
+
+DJANGO_GITPOD = os.environ.get('DJANGO_GITPOD', False)
+
 # Email
 
 MAILGUN_API_KEY = os.environ.get('MAILGUN_API_KEY', '')
+if not MAILGUN_API_KEY and not DJANGO_GITPOD:
+    raise KeyError("missing env MAILGUN_API_KEY")
+
 MAILGUN_DOMAIN = os.environ.get('MAILGUN_DOMAIN', '')
+if not MAILGUN_DOMAIN and not DJANGO_GITPOD:
+    raise KeyError("missing env MAILGUN_DOMAIN")
 
 # Heroku
 
-if not os.environ.get('DJANGO_GITPOD', False):
+if not DJANGO_GITPOD:
     django_heroku.settings(locals())

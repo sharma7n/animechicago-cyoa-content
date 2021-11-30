@@ -1,34 +1,42 @@
 import os
 
 from django.core.management.base import BaseCommand, CommandError
-import requests
-
-from config.settings import FROM_EMAIL
+from cyoa.api import SendMailRequest
+from cyoa.mail import send_mail
 
 class Command(BaseCommand):
-    def handle(self, *args, **options):
-        MAILGUN_API_KEY = os.environ.get('MAILGUN_API_KEY', '')
-        if not MAILGUN_API_KEY:
-            raise CommandError("missing env MAILGUN_API_KEY")
-        
-        MAILGUN_DOMAIN = os.environ.get('MAILGUN_DOMAIN', '')
-        if not MAILGUN_DOMAIN:
-            raise CommandError("missing env MAILGUN_DOMAIN")
-        
-        API_ROOT = f'https://api.mailgun.net/v3/{MAILGUN_DOMAIN}'
-
-        auth = ('api', MAILGUN_API_KEY)
-        data = {
-            'from': f"AnimeChicago Advice Bot <noreply@{MAILGUN_DOMAIN}>",
-            'to': ["sharma7n@gmail.com"],
-            'subject': "sendtestemail",
-            'text': "sendtestemail",
-        }
-        
-        r = requests.post(
-		    f'{API_ROOT}/messages',
-            auth=auth,
-            data=data,
+    def add_arguments(self, parser):
+        parser.add_argument(
+            'to',
+            type=str,
+            nargs=1,
+            help='address to send test email to',
         )
-        
-        print(r)
+        parser.add_argument(
+            '-r',
+            '--recommendation',
+            type=str,
+            nargs=1,
+            help='recommendation',
+        )
+        parser.add_argument(
+            '-s',
+            '--source',
+            type=str,
+            nargs=1,
+            help='source',
+        )
+    
+    def handle(self, *args, **options):
+        to = options['to']
+        recommendation = options.get('recommendation', "One Piece")
+        source = options.get('source', "Netflix")
+
+        req = SendMailRequest(
+            to=to,
+            recommendation=recommendation[0],
+            source=source[0],
+        )
+
+        r = send_mail(req)
+        print(r, r.text)

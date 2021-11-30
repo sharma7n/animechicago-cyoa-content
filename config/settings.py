@@ -140,15 +140,8 @@ STATIC_URL = '/static/'
 
 # Email
 
+MAILGUN_API_KEY = os.environ.get('MAILGUN_API_KEY', '')
 MAILGUN_DOMAIN = os.environ.get('MAILGUN_DOMAIN', '')
-FROM_EMAIL = f"noreply@{MAILGUN_DOMAIN}"
-ANYMAIL = {
-    "MAILGUN_API_KEY": os.environ.get('MAILGUN_API_KEY', ''),
-    "MAILGUN_SENDER_DOMAIN": MAILGUN_DOMAIN,
-}
-EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
-DEFAULT_FROM_EMAIL = FROM_EMAIL
-SERVER_EMAIL = FROM_EMAIL
 
 # Heroku
 

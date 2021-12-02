@@ -7,7 +7,7 @@ from mailerlite import MailerLiteApi
 from config.settings import MAILGUN_API_KEY, MAILGUN_DOMAIN, MAILERLITE_API_KEY
 from cyoa.api import SendMailRequest
 
-MAILERLITE_SUBSCRIBERS_GROUP = 109580090 #TODO: replace with actual group ID
+MAILERLITE_SUBSCRIBERS_GROUP = 109448996
 
 MAIGUN_API_ROOT = f'https://api.mailgun.net/v3/{MAILGUN_DOMAIN}'
 MAILGUN_AUTH = ('api', MAILGUN_API_KEY)

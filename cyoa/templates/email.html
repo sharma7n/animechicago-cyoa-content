@@ -3,5 +3,8 @@
     <body>
         <p>You should watch {{ recommendation }}.</p>
         <p>It's streaming on {{ source }}.</p>
+        {% if subscribe %}
+        <p>You have been subscribed to the AnimeChicago newsletter!</p>
+        {% endif %}
     </body>
 </html>

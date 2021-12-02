@@ -15,6 +15,7 @@ django-cors-headers = "*"
 django-anymail = {extras = ["mailgun"], version = "*"}
 cattrs = "*"
 mailerlite-api-python = "*"
+whitenoise = "*"
 
 [dev-packages]
 pytest = "*"

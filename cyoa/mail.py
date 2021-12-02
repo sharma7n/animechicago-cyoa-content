@@ -7,16 +7,17 @@ from mailerlite import MailerLiteApi
 from config.settings import MAILGUN_API_KEY, MAILGUN_DOMAIN, MAILERLITE_API_KEY
 from cyoa.api import SendMailRequest
 
-MAILERLITE_SUBSCRIBERS_GROUP = 109580090 #TODO: replace with actual group ID
+MAILERLITE_SUBSCRIBERS_GROUP = 109448996
 
 MAIGUN_API_ROOT = f'https://api.mailgun.net/v3/{MAILGUN_DOMAIN}'
 MAILGUN_AUTH = ('api', MAILGUN_API_KEY)
 
-FROM = f'AnimeChicago Advice Bot <noreply@{MAILGUN_DOMAIN}>'
-SUBJECT = "Your Anime Recommendation!"
+FROM = f'AnimeChicago\'s Advice Bot <bot@{MAILGUN_DOMAIN}>'
+SUBJECT = "You should really watch this!"
 
 def send_mail(smr: SendMailRequest):
     html = render_to_string('email.html', context=attr.asdict(smr))
+    print(html)
     data = {
         'from': FROM,
         'to': [smr.to],

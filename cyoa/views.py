@@ -127,3 +127,9 @@ def generate_lead(request):
         return JsonResponse(attr.asdict(SendMailResponse(success=True, error_message=None)))
     else:
         return JsonResponse(attr.asdict(SendMailResponse(success=False, error_message=resp.text)))
+
+def generate_lead_sample(request):
+    context = {
+        'recommendation': "Hajime no Ippo"
+    }
+    return render(request, 'email.html', context=context)

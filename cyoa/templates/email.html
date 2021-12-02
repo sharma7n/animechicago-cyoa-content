@@ -1,10 +1,28 @@
 <html>
     <head></head>
     <body>
-        <p>You should watch {{ recommendation }}.</p>
-        <p>It's streaming on {{ source }}.</p>
-        {% if subscribe %}
-        <p>You have been subscribed to the AnimeChicago newsletter!</p>
-        {% endif %}
+        {% load static %}
+        <p style="text-align:center;"><img src="{% static 'cyoa/logo-animechicago-word.png' %}" alt="AnimeChicago Logo"></img></p>
+
+        <p>Greetings!</p>
+
+        <p>Thanks for taking the time to find your next anime obsession with AnimeChicago's Advice Bot.</p>
+
+        <p>Based on your responses, you should watch <b>{{ recommendation }}</b>.</p>
+
+        <p>We hope you enjoy this selection! Find it streaming using our favorite search tool: <a href="https://anilist.co/" style="color:#4455CE;">AniList.co</a></p>
+
+        ––––––––
+
+        <p>Want more anime recommendations? Or to meet fellow anime fans? Join us for an upcoming Mixer: <a href="https://meetup.com/animechicago/events/" style="color:#4455CE;">Meetup.com/AnimeChicago/Events</a></p>
+
+        <p>AnimeChicago creates new and exciting anime experiences for all Chicagoans as a charitable nonprofit. <a href="https://animechicago.com/" style="color:#4455CE;">Learn more about us!</a></p>
+
+        <p>Like our Bot? <a href="http://bot.animechicago.com/" style="color:#4455CE;">Ask for another recommendation</a>, share it with your friends, and <a href="https://animechicago.com/support/" style="color:#4455CE;">support our mission</a></p>
+
+        
+        <p>Thanks!</p>
+
+        <p>— Team AnimeChicago</p>
     </body>
 </html>

@@ -13,7 +13,7 @@ MAIGUN_API_ROOT = f'https://api.mailgun.net/v3/{MAILGUN_DOMAIN}'
 MAILGUN_AUTH = ('api', MAILGUN_API_KEY)
 
 FROM = f'AnimeChicago\'s Advice Bot <bot@{MAILGUN_DOMAIN}>'
-SUBJECT = "You should really watch this!"
+SUBJECT = "🤖 Your Next Anime Obsession Is..."
 
 def send_mail(smr: SendMailRequest):
     html = render_to_string('email.html', context=attr.asdict(smr))

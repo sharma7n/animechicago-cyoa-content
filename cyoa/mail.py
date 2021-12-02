@@ -25,7 +25,7 @@ def send_mail(smr: SendMailRequest):
     }
 
     if smr.subscribe:
-        add_subscriber(smr.to[0])
+        add_subscriber(smr.to)
     
     return requests.post(
         f'{MAIGUN_API_ROOT}/messages',

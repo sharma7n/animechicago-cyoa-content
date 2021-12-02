@@ -34,8 +34,8 @@ class Command(BaseCommand):
     
     def handle(self, *args, **options):
         to = options['to']
-        recommendation = options.get('recommendation', "One Piece")
-        source = options.get('source', "Netflix")
+        recommendation = options.get('recommendation') or ["One Piece"]
+        source = options.get('source') or ["Netflix"]
         subscribe = options.get('subscribe', False)
 
         req = SendMailRequest(

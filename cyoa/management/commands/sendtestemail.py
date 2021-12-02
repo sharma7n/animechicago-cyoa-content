@@ -39,7 +39,7 @@ class Command(BaseCommand):
         subscribe = options.get('subscribe', False)
 
         req = SendMailRequest(
-            to=to,
+            to=to[0],
             recommendation=recommendation[0],
             source=source[0],
             subscribe=subscribe,

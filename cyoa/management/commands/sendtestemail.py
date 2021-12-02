@@ -26,16 +26,23 @@ class Command(BaseCommand):
             nargs=1,
             help='source',
         )
+        parser.add_argument(
+            '--subscribe',
+            action='store_true',
+            help='subscribe to newsletter',
+        )
     
     def handle(self, *args, **options):
         to = options['to']
         recommendation = options.get('recommendation', "One Piece")
         source = options.get('source', "Netflix")
+        subscribe = options.get('subscribe', False)
 
         req = SendMailRequest(
             to=to,
             recommendation=recommendation[0],
             source=source[0],
+            subscribe=subscribe,
         )
 
         r = send_mail(req)

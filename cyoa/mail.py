@@ -2,12 +2,17 @@ import attr
 import requests
 
 from django.template.loader import render_to_string
+from mailerlite import MailerLiteApi
 
-from config.settings import MAILGUN_API_KEY, MAILGUN_DOMAIN
+from config.settings import MAILGUN_API_KEY, MAILGUN_DOMAIN, MAILERLITE_API_KEY
 from cyoa.api import SendMailRequest
 
-API_ROOT = f'https://api.mailgun.net/v3/{MAILGUN_DOMAIN}'
-AUTH = ('api', MAILGUN_API_KEY)
+MAILERLITE_API = MailerLiteApi(MAILERLITE_API_KEY)
+MAILERLITE_SUBSCRIBERS_GROUP = 109580090 #TODO: replace with actual group ID
+
+MAIGUN_API_ROOT = f'https://api.mailgun.net/v3/{MAILGUN_DOMAIN}'
+MAILGUN_AUTH = ('api', MAILGUN_API_KEY)
+
 FROM = f'AnimeChicago Advice Bot <noreply@{MAILGUN_DOMAIN}>'
 SUBJECT = "Your Anime Recommendation!"
 
@@ -20,8 +25,21 @@ def send_mail(smr: SendMailRequest):
         'html': html,
     }
 
+    if smr.subscribe:
+        add_subscriber(smr.to[0])
+    
     return requests.post(
-        f'{API_ROOT}/messages',
-        auth=AUTH,
+        f'{MAIGUN_API_ROOT}/messages',
+        auth=MAILGUN_AUTH,
         data=data,
     )
+
+def add_subscriber(subscriber: str):
+    subscribers_data = {
+        'name': "", # MailerLite API requires name for subscribers data but we don't want to collect that in the UI.
+        'email': subscriber,
+    }
+    return MAILERLITE_API.groups.add_single_subscriber(MAILERLITE_SUBSCRIBERS_GROUP, subscribers_data)
+
+def list_subscribers():
+    return MAILERLITE_API.groups.subscribers(MAILERLITE_SUBSCRIBERS_GROUP)

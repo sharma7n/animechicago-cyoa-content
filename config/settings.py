@@ -152,6 +152,10 @@ MAILGUN_DOMAIN = os.environ.get('MAILGUN_DOMAIN', '')
 if not MAILGUN_DOMAIN and not DJANGO_GITPOD:
     raise KeyError("missing env MAILGUN_DOMAIN")
 
+MAILERLITE_API_KEY = os.environ.get('MAILERLITE_API_KEY', '')
+if not MAILERLITE_API_KEY and not DJANGO_GITPOD:
+    raise KeyError("missing env MAILERLITE_API_KEY")
+
 # Heroku
 
 if not DJANGO_GITPOD:

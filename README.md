@@ -18,6 +18,10 @@ If you're not using gitpod, or you need to set things up manually, please follow
 1. Set the following environment variables: `DJANGO_SECRET_KEY`, `DJANGO_DB_NAME`, `DJANGO_DB_USERID`, `DJANGO_DB_PASSWORD`, `DJANGO_SUPERUSER_USERNAME`, `DJANGO_SUPERUSER_PASSWORD`.
 1. Run `bash app-bootstrap-dev.sh`.
 
+### Set up email API credentials
+
+You will need to set the environment variables `MAILERLITE_API_KEY`, `MAILGUN_API_KEY`, and `MAILGUN_DOMAIN` manually. Contact one of the AnimeChicago staff for these values. The development server will still run without these, but none of the email functionality (including the /mail route) will work correctly.
+
 ### Launch the Development Server
 
 `pipenv run python manage.py runserver`

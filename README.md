@@ -25,3 +25,9 @@ You will need to set the environment variables `MAILERLITE_API_KEY`, `MAILGUN_AP
 ### Launch the Development Server
 
 `pipenv run python manage.py runserver`
+
+## Deployment
+
+The content server is hosted on Heroku. All commits to the master branch will automatically trigger new deployments in Heroku, and the new version of the app will start running as soon as the deployment finishes (which usually takes less than a minute).
+
+If you need to change something on Heroku directly (which includes, but is not limited to, changing credentials for third-party services used in production, such as Mailerlite and Mailgun credentials), please contact sharma7n@gmail.com

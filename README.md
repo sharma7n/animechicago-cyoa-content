@@ -20,7 +20,7 @@ If you're not using gitpod, or you need to set things up manually, please follow
 
 ### Set up email API credentials
 
-You will need to set the environment variables `MAILERLITE_API_KEY`, `MAILGUN_API_KEY`, and `MAILGUN_DOMAIN` manually. Contact one of the AnimeChicago staff for these values. The development server will still run without these, but none of the email functionality (including the /mail route) will work correctly.
+You will need to set the environment variables `MAILERLITE_API_KEY`, `MAILGUN_API_KEY`, and `MAILGUN_DOMAIN` manually (even if using gitpod). Contact one of the AnimeChicago staff for these values. The development server will still run without these, but none of the email functionality (including the /mail route) will work correctly.
 
 ### Launch the Development Server
 

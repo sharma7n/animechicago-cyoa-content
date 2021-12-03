@@ -41,12 +41,3 @@ def add_subscriber(subscriber: str):
         'email': subscriber,
     }
     return MailerLiteApi(MAILERLITE_API_KEY).groups.add_single_subscriber(MAILERLITE_SUBSCRIBERS_GROUP, subscribers_data)
-
-def count_subscribers():
-    r = requests.get(
-        f'{MAILERLITE_API_ROOT}/groups/{MAILERLITE_SUBSCRIBERS_GROUP}/subscribers/count',
-        headers={
-            'X-MailerLite-ApiKey': MAILERLITE_API_KEY,
-        }
-    )
-    return r.json()

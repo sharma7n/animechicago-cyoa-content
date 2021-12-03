@@ -2,7 +2,7 @@ import os
 
 from django.core.management.base import BaseCommand, CommandError
 from cyoa.api import SendMailRequest
-from cyoa.mail import add_subscriber, list_subscribers
+from cyoa.mail import add_subscriber, count_subscribers
 
 class Command(BaseCommand):
     def add_arguments(self, parser):

@@ -7,6 +7,7 @@ from mailerlite import MailerLiteApi
 from config.settings import MAILGUN_API_KEY, MAILGUN_DOMAIN, MAILERLITE_API_KEY
 from cyoa.api import SendMailRequest
 
+MAILERLITE_API_ROOT = 'https://api.mailerlite.com/api/v2/'
 MAILERLITE_SUBSCRIBERS_GROUP = 109448996
 
 MAIGUN_API_ROOT = f'https://api.mailgun.net/v3/{MAILGUN_DOMAIN}'
@@ -41,5 +42,11 @@ def add_subscriber(subscriber: str):
     }
     return MailerLiteApi(MAILERLITE_API_KEY).groups.add_single_subscriber(MAILERLITE_SUBSCRIBERS_GROUP, subscribers_data)
 
-def list_subscribers():
-    return MailerLiteApi(MAILERLITE_API_KEY).groups.subscribers(MAILERLITE_SUBSCRIBERS_GROUP)
+def count_subscribers():
+    r = requests.get(
+        f'{MAILERLITE_API_ROOT}/groups/{MAILERLITE_SUBSCRIBERS_GROUP}/subscribers/count',
+        headers={
+            'X-MailerLite-ApiKey': MAILERLITE_API_KEY,
+        }
+    )
+    return r.json()

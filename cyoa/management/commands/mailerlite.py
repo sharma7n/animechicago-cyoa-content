@@ -14,7 +14,7 @@ class Command(BaseCommand):
             help='email address to add to subscribers',
         )
         parser.add_argument(
-            '--list',
+            '--count',
             action='store_true',
             help='list all subscribers in group',
         )
@@ -25,7 +25,7 @@ class Command(BaseCommand):
             r = add_subscriber(add[0])
             print(r)
         
-        list_ = options.get('list', False)
-        if list_:
-            r = list_subscribers()
-            print(len(r))
+        count = options.get('count', False)
+        if count:
+            r = count_subscribers()
+            print(r)

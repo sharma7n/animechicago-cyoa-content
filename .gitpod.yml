@@ -3,4 +3,4 @@ image:
 
 tasks:
   - init: bash app-bootstrap-dev.sh
-    command: pipenv run python manage.py runserver --settings=config.dev_settings
+    command: pipenv run python manage.py runserver --settings=config.dev_settings --nostatic
